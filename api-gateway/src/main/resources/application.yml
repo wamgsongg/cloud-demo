@@ -1,6 +1,12 @@
 server:
   port: 7000
 spring:
+  zipkin:
+    base-url: http://127.0.0.1:9411/
+    discovery-client-enabled: false
+  sleuth:
+    sampler:
+      probability: 1.0  #采样百分比 0.0 - 1.0
   application:
     name: api-gateway
   cloud:
@@ -12,4 +18,4 @@ spring:
           predicates: # 断言(条件判断，返回值是boolean 转发请求要满足的条件)
             - Path=/product-serv/** # 当请求路径满足path指定的规则时，才正常转发
           filters: # 过滤器
-            - StriPrefix=1 # 在请求转发之前去掉一层路径
+            - StripPrefix=1 # 在请求转发之前去掉一层路径

@@ -1,6 +1,12 @@
 server:
   port: 8091
 spring:
+  zipkin:
+    base-url: http://127.0.0.1:9411/
+    discovery-client-enabled: false
+  sleuth:
+    sampler:
+      probability: 1.0  #采样百分比 0.0 - 1.0
   application:
     name: service-order
   datasource:
@@ -18,6 +24,9 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
 service-product: #调用的提供者的名称
   ribbon:
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
